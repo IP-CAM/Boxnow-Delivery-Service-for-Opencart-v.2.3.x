@@ -179,7 +179,11 @@ class ControllerExtensionShippingBoxnow extends Controller
 			// Remove all spaces and dashes from the phone number
 			$boxnow_partner_phone = str_replace([' ', '-'], '', $boxnow_partner_phone);
 		
-			// Regular expression to match a phone number starting with +359 followed by 9 digits
+			// Regular expression to match and enforce phone number format
+			$re = '/^(?:\+?359|0)?/m';
+			$boxnow_partner_phone = preg_replace($re, '+359', $boxnow_partner_phone);
+		
+			// Check if the phone number starts with +359 followed by 9 digits
 			$pattern = '/^\+359\d{9}$/';
 		
 			// Check if the phone number matches the pattern
